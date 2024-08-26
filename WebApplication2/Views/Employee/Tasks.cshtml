@@ -1,0 +1,79 @@
+﻿@model EmployeeViewModel;
+<!-- main -->
+<main class="container">
+    <div class="main-frame">
+        <div class="main-frame-credentials">
+            <span class="main-frame-credentials-header">Ваша информация</span>
+
+            <img src="../Util/ProfilePic.svg"
+                 alt=""
+                 class="main-frame-credentials-profile" />
+
+            <div class="main-frame-credentials-info">
+                <span>Фамилия @Model.SignedInEmployee.Surname</span>
+                <span>Имя: @Model.SignedInEmployee.Name</span>
+                <span>Отчество @Model.SignedInEmployee.Patronymic</span>
+                
+                @if (Model.SignedInEmployee.Department is not null)
+                {
+                    <p></p>
+                    <span>Отдел: @Model.SignedInEmployee.Department</span>
+                    <span>Должность: @Model.SignedInEmployee.Position</span>
+                    <span>Начальник отдела: @Model.SignedInEmployee.Employer</span>
+                }
+            </div>
+        </div>
+
+        <div class="main-frame-tasks">
+            @if (Model.Tasks is not null && Model.Tasks.Count > 0)
+            {
+                <span class="main-frame-tasks-header">Ваши задачи</span>
+
+                @foreach (var task in Model.Tasks)
+                {
+                    TimeSpan timeToDoTask = task.Deadline - DateTime.Now;
+
+                    <div class="main-frame-tasks-single">
+                        <span>Название задачи: @task.Title</span>
+                        <span>Описание задачи: @task.Description</span>
+                        <span>Дата выдачи: @task.AssignDate</span>
+                        <span>Дедлайн: @task.Deadline</span>
+                        @switch (task.Status)
+                        {
+                            case (WebApplication2.Models.TaskStatus.Expired):
+                                <span>Статус: просрочена</span>
+                                break;
+
+                            case (WebApplication2.Models.TaskStatus.InProgress):
+                                <span>Статус: в процессе выполнения</span>
+                                break;
+
+                            case (WebApplication2.Models.TaskStatus.Done):
+                                <span>Статус: завершена</span>
+                                break;
+
+                            default:
+                                break;
+                        }
+                        @if (task.Status == WebApplication2.Models.TaskStatus.InProgress)
+                        {
+                            <span>Осталось времени: @timeToDoTask.Hours:@timeToDoTask.Minutes:@timeToDoTask.Seconds (на момент обновления)</span>
+                        }
+                    </div>
+
+                    <form method="post" asp-action="MarkTaskAsDone" asp-controller="employee" asp-route-id="@task.Id">
+                        <button class="main-frame-tasks-single-button"
+                                onclick="return confirm('Вы уверены, что хотите завершить задачу @task.Title ?')">
+                            <img src="../Util/GreenTick.svg" alt="Green Tick" />
+                            Отметить как выполненную
+                        </button>
+                    </form>
+                }
+            }
+            else
+            {
+                <h1 style="align-self: center;">У вас отсутствуют задачи</h1>
+            }
+        </div>
+    </div>
+</main>

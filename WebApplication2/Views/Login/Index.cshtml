@@ -1,0 +1,42 @@
+﻿@model LoginViewModel
+@section Meta{
+    <link rel="stylesheet" href="~/css/AuthenticationStyle.css" asp-append-version="true" />
+    <script defer src="~/lib/jquery/jquery.js"></script>
+    <script defer src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script defer src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <title>Вход в аккаунт</title>
+}
+
+<!-- forms -->
+<main class="container">
+    <img src="../Util/ZenitLogo.svg"
+         alt="Zenit Logo"
+         class="logo" />
+
+    <span>Вход в систему</span>
+
+    <div class="form">
+        <form method="post" class="form-frame">
+            <label asp-for="Login">
+                Логин
+                <input asp-for="Login" />
+                <span asp-validation-for="Login"></span>
+            </label>
+
+            <label asp-for="Password">
+                Пароль
+                <input asp-for="Password" />
+                <span asp-validation-for="Password"></span>
+            </label>
+
+            <label asp-for="RememberMe" class="label-checkbox">
+                Не выходить из аккаунта
+                <input asp-for="RememberMe" class="input-checkbox"/>
+            </label>
+
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <button type="submit">Войти</button>
+        </form>
+    </div>
+</main>

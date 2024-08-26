@@ -1,0 +1,159 @@
+body {
+    font-family: "Roboto";
+}
+/* ---------------------------------------------------------------------------- */
+/*                      header */
+/* ---------------------------------------------------------------------------- */
+.header-frame {
+    width: 100%;
+    height: 60px;
+
+    background: rgba(236, 234, 222, 0.4);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-logo {
+    width: 50px;
+    height: 50px;
+
+    position: relative;
+    right: 80px;
+}
+.header-links {
+    display: flex;
+    gap: 30px;
+
+    position: relative;
+    left: 80px;
+}
+.header-links-link {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease-out;
+
+    font-family: "Roboto";
+}
+.header-links-link:hover {
+    color: blue;
+}
+/* ---------------------------------------------------------------------------- */
+/*                      assign task form*/
+/* ---------------------------------------------------------------------------- */
+.form-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(241, 241, 241);
+
+    padding: 20px 0;
+    gap: 20px;
+}
+.form-frame > span {
+    font-size: 32px;
+}
+.form-assignee {
+    background: white;
+    border-radius: 7px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+
+    padding: 10px 5px;
+}
+.form-assignee > img {
+    width: 40px;
+    height: 40px;
+}
+.form-assignee > span:nth-child(2),
+.form-assignee > span:nth-child(5) {
+    height: 5px;
+    width: 100%;
+
+    background: black;
+}
+.form-assignee > span:nth-child(3),
+.form-assignee > span:nth-child(6) {
+    font-size: 32px;
+}
+.form-assignee > span:nth-child(4),
+.form-assignee > span:nth-child(7) {
+    font-size: 20px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+form > label {
+    display: flex;
+    flex-direction: column;
+}
+form > label > input,
+form > label > textarea {
+    width: 400px;
+    font-family: "Roboto";
+    font-size: 20px;
+}
+input,
+textarea {
+    outline: none;
+    border: 2px solid black;
+    padding: 10px;
+
+    transition: border-color 0.3s ease-in-out;
+}
+input:focus,
+textarea:focus {
+    border-color: blue;
+}
+form > button {
+    font-family: "Roboto";
+    font-size: 32px;
+    outline: none;
+    border: 2px solid black;
+    border-radius: 5px;
+    background: rgb(252, 254, 255);
+
+    transition: border-color 0.3s ease-in-out;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+}
+form > button:focus,
+form > button:hover {
+    border-color: rgb(169, 241, 175);
+}
+form > button > img {
+    width: 40px;
+    height: 40px;
+}
+.span-validation{
+    width: 390px;
+}
+/* ---------------------------------------------------------------------------- */
+/*                      footer */
+/* ---------------------------------------------------------------------------- */
+.footer-frame {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(236, 234, 222, 0.4);
+    font-family: "Roboto";
+    padding: 5px 0;
+}
+.footer-frame a {
+    text-decoration: none;
+    color: black;
+}
+.footer-frame * {
+    margin: 0 20px;
+}

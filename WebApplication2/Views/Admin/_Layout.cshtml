@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/BurgerStyle.css" />
+    <link rel="stylesheet" href="~/css/WrapperStyle.css" />
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <div class="wrapper">
+        <!-- hamburger menu -->
+        <div class="off-screen-menu">
+            <a asp-controller="admin" asp-action="readdepartment" class="header-links-link">Отделы</a>
+            <a asp-controller="admin" asp-action="addemployee" class="header-links-link">Добавить работника</a>
+            <a asp-controller="admin" asp-action="adddepartment" class="header-links-link">Добавить отдел</a>
+            <a asp-controller="admin" asp-action="assignemployee" class="header-links-link">Присвоить работника отделу</a>
+            <a asp-controller="admin" asp-action="readunassignedemployees" class="header-links-link">Работники без отдела</a>
+        </div>
+        <nav class="container">
+            <img src="~/util/ZenitLogo.svg"
+                 asp-append-version=true
+                 alt=""
+                 class="header-logo"
+                 style="right: 0; padding-left: 20px" />
+            <div class="ham-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+
+        <!-- header -->
+        <header class="container">
+            <div class="header-frame">
+                <div class="header-links">
+                    <a asp-controller="admin" asp-action="readdepartment" class="header-links-link">Отделы</a>
+                    <a asp-controller="admin" asp-action="addemployee" class="header-links-link">Добавить работника</a>
+                    <a asp-controller="admin" asp-action="adddepartment" class="header-links-link">Добавить отдел</a>
+                    <a asp-controller="admin" asp-action="assignemployee" class="header-links-link">Присвоить работника отделу</a>
+                    <a asp-controller="admin" asp-action="readunassignedemployees" class="header-links-link">Работники без отдела</a>
+                </div>
+
+                <img src="~/util/ZenitLogo.svg"
+                     asp-append-version=true
+                     alt=""
+                     class="header-logo" />
+            </div>
+        </header>
+
+        @RenderBody()
+
+        <!-- footer -->
+        <footer class="container">
+            <div class="footer-frame">
+                <a href="https://zenit.by" class="header-links-link">ОАО "Зенит"</a>
+                <form method="post" asp-action="logout" asp-controller="account">
+                    <button class="sign-out" type="submit">Выйти из системы</button>
+                </form>
+                <span>(c) Copyright 2024</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- scripts -->
+    <script defer src="../JS/HamburgerMenu.js"></script>
+    <script defer src="../lib/jquery/jquery.js"></script>
+    <script defer src="../lib/jquery-validate/jquery.validate.js"></script>
+    <script defer src="../lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>

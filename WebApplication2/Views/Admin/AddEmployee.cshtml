@@ -1,0 +1,60 @@
+﻿@model AddEmployeeViewModel;
+@section Styles {
+    <link rel="stylesheet" href="~/css/AddEmployeeStyle.css" asp-append-version="true"/>
+    <script defer src="~/lib/jquery/jquery.js"></script>
+    <title>Добавление работника</title>
+}
+
+<!-- add form -->
+<main class="container">
+    <div class="form-frame">
+        <span>Добавление работника</span>
+
+        <form enctype="multipart/form-data" method="post" class="form">
+            <span>Персональные данные</span>
+
+            <label asp-for="Name">
+                Имя
+                <input asp-for="Name" autocomplete="off"/>
+                <span asp-validation-for="Name" class="span-validation"></span>
+            </label>
+
+            <label asp-for="Surname">
+                Фамилия
+                <input asp-for="Surname" autocomplete="off" />
+                <span asp-validation-for="Surname" class="span-validation"></span>
+            </label>
+
+            <label asp-for="Patronymic">
+                Отчество
+                <input asp-for="Patronymic" autocomplete="off" />
+                <span asp-validation-for="Patronymic" class="span-validation"></span>
+            </label>
+
+            <label asp-for="Hierarchy">
+                Позиция
+                <select asp-for="Hierarchy" asp-items="Html.GetEnumSelectList<Hierarchy>()"></select>
+            </label>
+
+            <span>Аутентификационные данные</span>
+
+            <label asp-for="Login">
+                Логин
+                <input asp-for="Login" />
+                <span asp-validation-for="Login" class="span-validation"></span>
+            </label>
+
+            <label asp-for="Password">
+                Пароль
+                <input asp-for="Password" />
+                <span asp-validation-for="Password" class="span-validation"></span>
+            </label>
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <button type="submit">Добавить</button>
+        </form>
+    </div>
+</main>
+
+@* <script defer src="~/js/ResetInputFields.js"></script> *@

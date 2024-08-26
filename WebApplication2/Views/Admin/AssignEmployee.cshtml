@@ -1,0 +1,52 @@
+﻿@model AssignEmployeeViewModel;
+@section Styles {
+    <link rel="stylesheet" href="~/css/AddEmployeeStyle.css" asp-append-version="true"/>
+    <title>Присвоить работника</title>
+}
+
+<main class="container">
+     <div class="form-frame">
+
+        @if (Model.UnassignedEmployees is not null
+             && Model.Departments is not null
+             && Model.UnassignedEmployees.Count > 0
+             && Model.Departments.Count > 0)
+        {
+            <span>Присвоить работника отделу</span>
+
+            <form method="post" class="form">
+                <label asp-for="Surname">
+                    Фамилия работника
+                    <select asp-for="Surname">
+                         @foreach (var emp in Model.UnassignedEmployees)
+                         {
+                                <option>@emp.Surname</option>
+                         }
+                    </select>
+                </label>
+
+                <label asp-for="Position">
+                    Должность
+                    <input asp-for="Position"/>
+                    <span asp-validation-for="Position" class="span-validation"></span>
+                </label>
+
+                <label asp-for="DepartmentName">
+                    Отдел
+                    <select asp-for="DepartmentName">
+                        @foreach (var depName in Model.Departments)
+                        {
+                            <option>@depName.Name</option>
+                        }
+                    </select>
+                </label>
+
+                <button type="submit">Присвоить</button>
+            </form>
+        }
+        else
+        {
+            <h1>В базе данных не существует неприкрепленных к отделу работников, или самих отделов</h1>
+        }
+    </div>
+</main>

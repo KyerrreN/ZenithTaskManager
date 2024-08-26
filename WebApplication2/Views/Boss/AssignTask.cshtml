@@ -1,0 +1,54 @@
+﻿@model AssignTaskViewModel
+@section Styles{
+    <link rel="stylesheet" href="~/css/BossAssignTaskStyle.css" asp-append-version="true"/>
+    <script defer src="~/lib/jquery/jquery.js"></script>
+    <script defer src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script defer src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <title>Дать задание</title>
+}
+<!-- assign task form -->
+<main class="container">
+    <div class="form-frame">
+        <span>
+            Вы собираетесь присвоить задание этому
+            подчиненному
+        </span>
+
+        <div class="form-assignee">
+            <img src="~/util/ProfilePic.svg" alt="Profile Pic" />
+            <span></span>
+            <span>ФИО</span>
+            <span>@Model.Emp.Surname @Model.Emp.Name @Model.Emp.Patronymic</span>
+            <span></span>
+            <span>Должность</span>
+            <span>@Model.Emp.Position</span>
+        </div>
+
+        <form method="post" asp-route-id="@Model.Emp.Id">
+            <label asp-for="Title">
+                Название задачи
+                <input asp-for="Title" />
+                <span asp-validation-for="Title" class="span-validation"></span>
+            </label>
+
+            <label asp-for="Description">
+                Описание задачи
+                <textarea asp-for="Description"
+                          rows="10"
+                          cols="50"></textarea>
+                <span asp-validation-for="Description" class="span-validation"></span>
+            </label>
+
+            <label asp-for="Deadline">
+                Дедлайн
+                <input asp-for="Deadline" />
+                <span asp-validation-for="Deadline" class="span-validation"></span>
+            </label>
+
+            <button type="submit" onclick="return confirm('Вы уверены, что хотите передать эту задачу работнику?')">
+                <img src="~/util/GreenTick.svg" alt="" />Присвоить
+                задание
+            </button>
+        </form>
+    </div>
+</main>

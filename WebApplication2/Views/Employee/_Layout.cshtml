@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="~/css/BurgerStyle.css" asp-append-version="true"/>
+        <link rel="stylesheet" href="~/css/IndexStyle.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/WrapperStyle.css" asp-append-version="true" />
+        <script defer src="~/lib/jquery/jquery.js"></script>
+        <title>Ваши задачи</title>
+    </head>
+
+    <body>
+        <div class="wrapper">
+        <!-- hamburger menu -->
+        <div class="off-screen-menu">
+            <a asp-action="tasks" class="header-links-link">Задачи</a>
+        </div>
+        <nav class="container">
+            <img src="~/util/ZenitLogo.svg"
+                 asp-append-version="true"
+                 alt=""
+                 class="header-logo"
+                 style="right: 0; padding-left: 20px" />
+            <div class="ham-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+
+        <!-- header -->
+        <header class="container">
+            <div class="header-frame">
+                <div class="header-links">
+                    <a asp-action="tasks" class="header-links-link">Задачи</a>
+                </div>
+
+                <img src="~/util/ZenitLogo.svg"
+                     asp-append-version="true"
+                     alt=""
+                     class="header-logo" />
+            </div>
+        </header>
+
+        @RenderBody()
+
+        <!-- footer -->
+        <footer class="container">
+            <div class="footer-frame">
+                <a href="https://zenit.by" class="header-links-link">ОАО "Зенит"</a>
+                <form method="post" asp-action="logout" asp-controller="account">
+                    <button class="sign-out" type="submit">Выйти из системы</button>
+                </form>
+                <span>(c) Copyright 2024</span>
+            </div>
+        </footer>
+
+        <!-- scripts -->
+        <script defer src="~/js/HamburgerMenu.js"></script>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+﻿@section Styles{
+    <link rel="stylesheet" href="~/css/AddEmployeeStyle.css" asp-append-version="true"/>
+    <title>Добавление отдела</title>
+}
+@model AddDepartmentViewModel
+<!-- add form -->
+<main class="container">
+    <div class="form-frame">
+        <span>Добавление отдела</span>
+
+        @if (Model.BossList != null && Model.BossList.Count != 0)
+        {
+            <form method="post" class="form">
+                <label asp-for="Name">
+                    Имя отдела
+                    <input asp-for="Name" />
+                </label>
+
+                <label asp-for="DepartmentHead">
+                    Начальник отдела
+                    <select asp-for="DepartmentHead">
+                        @foreach (var boss in Model.BossList)
+                        {
+                            <option>@boss.Surname @boss.Name @boss.Patronymic</option>
+                        }
+                    </select>
+                </label>
+
+                <div asp-validation-summary="All" style="width: 300px;"></div>
+                <button type="submit">Добавить</button>
+            </form>
+        }
+        else
+        {
+            <h1>В вашей базе данных нет начальников, либо все начальники закреплены за отделами</h1>
+        }
+    </div>
+</main>

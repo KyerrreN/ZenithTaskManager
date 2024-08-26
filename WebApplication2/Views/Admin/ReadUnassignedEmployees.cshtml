@@ -1,0 +1,83 @@
+﻿@section Styles{
+    <link rel="stylesheet" href="~/css/ReadDepartmentStyle.css"/>
+    <title>Сотрудники без отдела</title>
+}
+@model UnassignedEmployeeViewModel
+
+<main class="container">
+    <div class="department-frame">
+        @if (Model.UnassignedEmployees is not null)
+        {
+            if (Model.UnassignedEmployees.Count > 0)
+            {
+                <div class="department">
+                    <span>Работники, не прикрепленные к отделу</span>
+
+                    @foreach (var emp in Model.UnassignedEmployees)
+                    {
+                        <div class="employee-singular">
+                            <div class="employee-singular-info">
+                                <img src="~/util/ProfilePic.svg"
+                                     alt="Profile Pic" />
+
+                                <div class="employee-info">
+                                    <span>Имя: @emp.Name</span>
+                                    <span>Фамилия: @emp.Surname</span>
+                                    <span>Отчество: @emp.Patronymic</span>
+                                </div>
+                            </div>
+
+                            <form method="post" asp-action="DeleteEmployee" asp-route-id="@emp.Id">
+                                <button class="employee-delete-button"
+                                        onclick="return confirm('Вы уверены, что хотите удалить работника @emp.Name @emp.Surname @emp.Patronymic')">
+                                    Удалить работника
+                                </button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <h1>Работников, не прикрепленных к отделу, не существует</h1>
+            }
+        }
+
+        @if (Model.UnassignedBosses is not null)
+        {
+            if (Model.UnassignedBosses.Count > 0)
+            {
+                <div class="department">
+                    <span>Начальники, не прикрепленные к отделам</span>
+
+                    @foreach (var boss in Model.UnassignedBosses)
+                    {
+                        <div class="employee-singular">
+                            <div class="employee-singular-info">
+                                <img src="~/util/ProfilePic.svg"
+                                     alt="Profile Pic" />
+
+                                <div class="employee-info">
+                                    <span>Имя: @boss.Name</span>
+                                    <span>Фамилия: @boss.Surname</span>
+                                    <span>Отчество: @boss.Patronymic</span>
+                                </div>
+                            </div>
+
+                            <form method="post" asp-action="DeleteBoss" asp-route-id="@boss.Id">
+                                <button class="employee-delete-button"
+                                        onclick="return confirm('Вы уверены, что хотите удалить начальника @boss.Name @boss.Surname @boss.Patronymic')">
+                                    Удалить начальника
+                                </button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <h1>Начальников, не прикрепленных к отделу, не существует</h1>
+            }
+        }
+    </div>
+</main>

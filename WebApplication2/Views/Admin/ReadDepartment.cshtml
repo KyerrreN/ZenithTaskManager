@@ -1,0 +1,87 @@
+﻿@section Styles{
+    <link rel="stylesheet" href="~/css/ReadDepartmentStyle.css" asp-append-version="true"/>
+    <title>Отделы и работники</title>
+    <script defer src="~/lib/jquery/jquery.js"></script>
+}
+@model List<ReadDepartmentViewModel>
+
+<!-- departments -->
+<main class="container">
+    <div class="department-frame">
+        @if (Model is not null && Model.Count > 0)
+        {
+            <span>Список отделов</span>
+
+            foreach (var dep in Model)
+            {
+                <div class="department">
+                    <span>@dep.SingleDepartment.Name</span>
+
+                    <form method="post" asp-action="deletedepartment" asp-route-id="@dep.SingleDepartment.Id">
+                        <button type="submit" class="department-delete-button"
+                                onclick="return confirm('Вы уверены, что хотите удалить отдел @dep.SingleDepartment.Name')">
+                            Удалить отдел
+                        </button>
+                    </form>
+
+                    <div class="employees">
+                        <div class="employee-singular">
+                            <div class="employee-singular-info">
+                                <img src="~/util/ProfilePic.svg"
+                                     alt="Profile Pic" />
+
+                                <div class="employee-info">
+                                    <span>Имя: @dep.SingleBoss.Name</span>
+                                    <span>Фамилия: @dep.SingleBoss.Surname</span>
+                                    <span>Отчество: @dep.SingleBoss.Patronymic</span>
+                                    <span>Должность: Начальник отдела "@dep.SingleDepartment.Name"</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- Start of list of employees-->
+                    @if (dep.Employees is not null && dep.Employees.Count > 0)
+                    {
+                            @foreach (var emp in dep.Employees)
+                            {
+                                <div class="employee-singular">
+                                    <div class="employee-singular-info">
+                                        <img src="~/util/ProfilePic.svg"
+                                             alt="Profile Pic" />
+
+                                        <div class="employee-info">
+                                            <span>Имя: @emp.Name</span>
+                                            <span>Фамилия: @emp.Surname</span>
+                                            <span>Отчество: @emp.Patronymic</span>
+                                            <span>Должность: @emp.Position</span>
+                                        </div>
+                                    </div>
+
+                                    <form method="post" asp-action="DeleteEmployee" asp-route-id="@emp.Id">
+                                        <button class="employee-delete-button"
+                                                onclick="return confirm('Вы уверены, что хотите удалить работника @emp.Name @emp.Surname @emp.Patronymic')">
+                                                Удалить работника
+                                        </button>
+                                    </form>
+
+                                    <form method="post" asp-action="UnassignEmployee" asp-route-id="@emp.Id">
+                                        <button class="employee-delete-button employee-unassign-button"
+                                                onclick="return confirm('Вы уверены, что хотите выгнать работника @emp.Name @emp.Surname                                           @emp.Patronymic из отдела @emp.Department')">
+                                                Выгнать из отдела
+                                            </button>
+                                    </form>
+                                    
+                                </div>
+                            }
+                    }
+                    </div>
+                    <!-- End of list of employees-->
+                </div>
+            }
+        }
+        else
+        {
+            <h1 style="align-self: center; width: 80%;">В базе данных не существует отделов. <a asp-action="AddDepartment">Добавьте любой отдел</a> (если вы предварительно добавили сотрудника-начальника)</h1>
+        }
+    </div>
+</main>

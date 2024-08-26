@@ -1,0 +1,42 @@
+﻿@section Styles{
+    <link rel="stylesheet" href="~/css/BossHistoryStyle.css" asp-append-version="true"/>
+    <script defer src="~/lib/jquery/jquery.js"></script>
+    <title>История заданий</title>
+}
+@model BossHistoryViewModel
+<!-- main -->
+<main class="container">
+    <div class="main-frame">
+
+        @if (Model.HistoryOfTasks is not null && Model.HistoryOfTasks.Count > 0)
+        {
+            <span>История завершенных заданий</span>
+            <!-- start of history -->
+            @foreach (var task in Model.HistoryOfTasks)
+            {
+                <div class="history-task">
+                    <span>Название задачи: @task.Title</span>
+                    <span>
+                        Описание задачи: @task.Description
+                    </span>
+                    <span>Дата выдачи: @task.AssignDate</span>
+                    <span>Дата завершения: @task.CompletionDate</span>
+                    <span>Дедлайн: @task.Deadline</span>
+
+                    <form method="post" asp-action="DeleteTaskFromHistory" asp-controller="boss" asp-route-id="@task.Id">
+                        <button class="delete-task" onclick="return confirm('Вы уверены, что хотите удалить эту задачу?')">
+                            <img src="~/util/RedCrossInvalid.svg" />
+                            Удалить задачу из истории
+                        </button>
+                    </form>
+                </div>
+            }
+            <!-- end of history -->
+        }
+        else
+        {
+            <h1>История завершенных заданий пуста</h1>
+        }
+
+    </div>
+</main>

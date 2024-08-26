@@ -1,0 +1,34 @@
+/* ---------------------------------------------------------------------------- */
+/*                      Нужные стили для адаптива */
+/* ---------------------------------------------------------------------------- */
+body {
+    margin: 0px;
+}
+.wrapper {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+}
+.container {
+    max-width: 1440px;
+    width: 100%;
+
+    margin: 0px auto;
+}
+.sign-out{
+    outline: none;
+    border: 2px solid black;
+    font-size: 16px;
+
+    border-radius: 3px;
+}
+.sign-out:hover{
+    border-color: red;
+}
+/* ---------------------------------------------------------------------------- */
+/*                                Шрифты */
+/* ---------------------------------------------------------------------------- */
+@font-face {
+    font-family: "Roboto";
+    src: url(../../font/Roboto.ttf);
+}

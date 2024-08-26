@@ -1,0 +1,121 @@
+﻿@using WebApplication2.Models;
+@section Styles{
+    <link rel="stylesheet" href="~/css/BossManageStyle.css" asp-append-version="true"/>
+    <script defer src="~/lib/jquery/jquery.js"></script>
+    <script defer src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script defer src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <title>Ваши подчиненные</title>
+}
+@model BossManageViewModel
+<!-- main -->
+<main class="container">
+    <div class="main-frame">
+        <div class="boss-credentials">
+            <img src="~/util/ProfilePic.svg" alt="" />
+
+            <span>@Model.SignedInBoss.Surname @Model.SignedInBoss.Name @Model.SignedInBoss.Patronymic</span>
+            @if (Model.Department is not null)
+            {
+                <span>Руководитель отдела @Model.Department.Name</span>
+            }
+            else
+            {
+                <span>Вы пока не руководите никаким отделом</span>
+            }
+        </div>
+
+        <div class="boss-employees">
+            <!-- start of list -->
+            @if (Model.Department is null)
+            {
+                <h1 style="align-self: center;">У вас нет сотрудников в подчинении.</h1>
+                <h2 style ="align-self: center;">Причина: вы не руководите отделом</h2>
+            }
+            else
+            {
+                if (Model.Employees is not null && Model.Employees.Count > 0)
+                {
+                    <span>Ваши сотрудники</span>
+
+                    foreach (var emp in Model.Employees)
+                    {
+                        <div class="boss-employee-individual">
+                            <div class="boss-employee-individual-meta">
+                                <img src="~/util/ProfilePic.svg" alt="Аватарка" />
+
+                                <div>
+                                    <span>ФИО сотрудника: @emp.Surname @emp.Name @emp.Patronymic</span>
+                                </div>
+                            </div>
+
+                            <span>Задания</span>
+
+                            @if (Model.TasksToEmployee.ContainsKey(emp))
+                            {
+                                Model.TasksToEmployee.TryGetValue(emp, out List<Tasks> tasks);
+
+                                @foreach (var task in tasks)
+                                {
+                                    if (task.Status != WebApplication2.Models.TaskStatus.Done)
+                                    {
+                                        TimeSpan timeLeft = task.Deadline - DateTime.Now;
+
+                                        <div class="boss-employee-individual-tasks-single">
+                                            <span>Название задачи: @task.Title</span>
+                                            <span>
+                                                Описание задачи: @task.Description
+                                            </span>
+                                            @switch (task.Status)
+                                            {
+                                                case WebApplication2.Models.TaskStatus.InProgress:
+                                                    <span>Статус: в процессе выполнения</span>
+                                                    break;
+
+                                                case WebApplication2.Models.TaskStatus.Done:
+                                                    <span>Статус: завершена</span>
+                                                    break;
+
+                                                case WebApplication2.Models.TaskStatus.Expired:
+                                                    <span>Статус: просрочена</span>
+                                                    break;
+                                            }
+                                            <span>Дата выдачи: @task.AssignDate.ToShortDateString()</span>
+                                            <span>Дедлайн: @task.Deadline</span>
+                                            @if (task.Status != WebApplication2.Models.TaskStatus.Expired)
+                                            {
+                                                <span>Осталось времени: @timeLeft.Hours:@timeLeft.Minutes:@timeLeft.Seconds (на момент обновления страницы)</span>
+                                            }
+
+                                            <div>
+                                                <form method="post" asp-action="MarkTaskAsDone" asp-controller="boss" asp-route-id="@task.Id">
+                                                    <button type="submit" onclick="return confirm('Вы уверены, что хотите завершить задачу @task.Title?')">
+                                                        <img src="../Util/GreenTick.svg"
+                                                             alt="" />Отметить как завершенную
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            }
+
+                            <form method="post" asp-action="tryassigntask" asp-route-employeeId="@emp.Id">
+                                <div class="boss-employee-individual-buttons">
+                                    <button type="submit">Дать задание</button>
+                                </div>
+                            </form>
+                            
+                        </div>
+                    }
+                }
+                else
+                {
+                    <h1>У вас нет сотрудников в подчинении</h1>
+                }
+            }
+            
+
+            <!-- end of list -->
+        </div>
+    </div>
+</main>

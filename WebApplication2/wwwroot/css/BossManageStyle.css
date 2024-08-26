@@ -1,0 +1,214 @@
+body {
+    font-family: "Roboto";
+}
+/* ---------------------------------------------------------------------------- */
+/*                      header */
+/* ---------------------------------------------------------------------------- */
+.header-frame {
+    width: 100%;
+    height: 60px;
+
+    background: rgba(236, 234, 222, 0.4);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-logo {
+    width: 50px;
+    height: 50px;
+
+    position: relative;
+    right: 80px;
+}
+.header-links {
+    display: flex;
+    gap: 30px;
+
+    position: relative;
+    left: 80px;
+}
+.header-links-link {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease-out;
+
+    font-family: "Roboto";
+}
+.header-links-link:hover {
+    color: blue;
+}
+/* ---------------------------------------------------------------------------- */
+/*                      main/boss */
+/* ---------------------------------------------------------------------------- */
+.main-frame {
+    width: 100%;
+    display: flex;
+    padding: 20px 0;
+    gap: 30px;
+    justify-content: center;
+
+    background-color: #ece7e4;
+}
+.boss-credentials {
+    background-color: white;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: flex-start;
+
+    padding: 5px 10px;
+}
+.boss-credentials > img {
+    width: 40px;
+    height: 40px;
+}
+.boss-employees {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 70%;
+}
+.boss-employees > span {
+    text-align: center;
+    font-size: 24px;
+}
+.boss-employee-individual {
+    background: rgb(241, 241, 241);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 10px 0;
+}
+.boss-employee-individual > span {
+    align-self: center;
+    font-size: 24px;
+}
+.boss-employee-individual-meta {
+    display: flex;
+    align-self: center;
+    gap: 30px;
+    padding-top: 20px;
+}
+.boss-employee-individual-meta > img {
+    width: 40px;
+    height: 40px;
+}
+.boss-employee-individual-meta > div {
+    display: flex;
+    flex-direction: column;
+}
+.boss-employee-individual-tasks {
+    width: 80%;
+    background-color: rgba(214, 159, 133, 0.301);
+    border-radius: 10px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: 10px;
+}
+.boss-employee-individual-tasks > span:first-child {
+    text-align: center;
+    font-size: 24px;
+}
+.boss-employee-individual-tasks-single {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    background-color: rgba(214, 159, 133, 0.301);
+    border-radius: 10px;
+    padding: 10px;
+    align-self: center;
+}
+.boss-employee-individual-tasks-single > div {
+    align-self: center;
+}
+.boss-employee-individual-tasks-single > div > form > button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    border: 3px solid black;
+    border-radius: 5px;
+    outline: none;
+
+    font-size: 16px;
+}
+.boss-employee-individual-tasks-single > div > form > button > img {
+    width: 40px;
+    height: 40px;
+}
+form {
+    align-self: center;
+}
+.boss-employee-individual-buttons {
+    align-self: center;
+}
+.boss-employee-individual-buttons > button {
+    outline: none;
+    border: 1px solid black;
+    border-radius: 3px;
+
+    font-size: 20px;
+}
+.boss-employee-individual-tasks-single > span:first-child {
+    text-align: center;
+    font-size: 24px;
+}
+/* ---------------------------------------------------------------------------- */
+/*                      footer */
+/* ---------------------------------------------------------------------------- */
+.footer-frame {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(236, 234, 222, 0.4);
+
+    font-family: "Roboto";
+
+    padding: 5px 0;
+}
+.footer-frame a {
+    text-decoration: none;
+    color: black;
+}
+.footer-frame * {
+    margin: 0 20px;
+}
+/* ---------------------------------------------------------------------------- */
+/*                      Медиа-запросы */
+/* ---------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .main-frame {
+        flex-direction: column;
+        align-items: center;
+    }
+    .boss-credentials {
+        align-self: auto;
+    }
+}
+@media (max-width: 650px) {
+    /* ---------------------------------------------------------------------------- */
+    /*                                  hamburger menu */
+    /* ---------------------------------------------------------------------------- */
+    header {
+        display: none;
+    }
+    .off-screen-menu {
+        display: flex;
+    }
+
+    nav.container {
+        display: flex;
+    }
+}

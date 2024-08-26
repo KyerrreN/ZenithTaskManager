@@ -1,0 +1,98 @@
+/* ---------------------------------------------------------------------------- */
+/*                      Бургер меню */
+/* ---------------------------------------------------------------------------- */
+.off-screen-menu {
+    background: white;
+    height: 100vh;
+    width: 100%;
+    max-width: 300px;
+    position: fixed;
+    top: 0;
+    right: -400px;
+    z-index: 10;
+
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    font-size: 20px;
+    font-family: Poppins;
+    transition: 0.3s ease;
+}
+
+.off-screen-menu a {
+    text-decoration: none;
+    color: black;
+    font-family: "Roboto";
+}
+.off-screen-menu a.header-content-nav-rectangle {
+    color: white;
+}
+.off-screen-menu.active {
+    right: 0;
+}
+
+nav.container {
+    display: none;
+    z-index: 10;
+    background: rgba(236, 234, 222, 0.4);
+}
+
+.ham-menu {
+    height: 50px;
+    width: 50px;
+    margin-left: auto;
+    position: relative;
+}
+
+.ham-menu span {
+    height: 5px;
+    width: 100%;
+    background-color: rgb(0, 81, 255);
+    border-radius: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-100%, -50%);
+    transition: 0.3s ease;
+}
+
+.ham-menu span:nth-child(1) {
+    top: 25%;
+}
+
+.ham-menu span:nth-child(3) {
+    top: 75%;
+}
+
+.ham-menu.active span:nth-child(1) {
+    top: 50%;
+    transform: translate(-100%, -50%) rotate(45deg);
+}
+.ham-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+.ham-menu.active span:nth-child(3) {
+    top: 50%;
+    transform: translate(-100%, -50%) rotate(-45deg);
+}
+#off-screen-menu-profile {
+    width: 40px;
+    height: 40px;
+}
+@media (max-width: 1240px) {
+    /* ---------------------------------------------------------------------------- */
+    /*                                  hamburger menu */
+    /* ---------------------------------------------------------------------------- */
+    header {
+        display: none;
+    }
+    .off-screen-menu {
+        display: flex;
+    }
+    nav.container {
+        display: flex;
+    }
+}
